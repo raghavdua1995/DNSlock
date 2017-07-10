@@ -1,0 +1,12 @@
+#!/bin/bash
+apt-get install dnsmasq
+mov /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
+wget -O /etc/dnsmasq.conf http://link.com/
+mkdir /etc/DNSlock
+touch /etc/DNSlock/contentblock.list
+chmod 0777 /etc/DNSlock/contentblock.list
+rm /etc/resolv.conf
+wget -O /etc/resolv.conf http://link.com/
+wget -O /etc/DNSlock/sources.list http://link.com/
+wget -O /etc/DNSlock/update http://link.com/
+chmod 0777 /etc/DNSlock/update

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+##Create temporary file where domains from various host file will me written. 
+touch /etc/DNSlock/common_hosts.list
+
+n=1;
+
+##For loop to download hosts from sources mentioned in sources.list. If download succedes then loop will create new cached list and delete the backup cached list otherrwise it will restore the backup cache list
+
+for i in $(cat /etc/DNSlock/sources.list); do
+cp /etc/DNSlock/cache _$n.list /etc/DNSlock/cache _$n.list.bak 2>>/dev/null;
+curl -s $i > /etc/DNSlock/cache_$n.list; res=$?; n=$((n+1));
+if [ "$res" == "0" ]
+then
+echo "List fetched." 
+rm /etc/DNSlock/cache _$n.list.bak 2>>/dev/null
+else
+echo "Failed to fetch list, using catched list instead."
+mov /etc/DNSlock/cache _$n.list.bak /etc/DNSlock/cache _$n.list 2>>/dev/null
+fi
+done
+
+##Copying content from cached lists to common_hosts.list. 
+for((k=1;k<n;k++)); do
+cat /etc/DNSlock/cache_$k.list >> /etc/DNSlock/common_hosts.list;
+done
+sudo sed -e 's/\r//' -e '/^127.0.0.1/!d' -e 's/127.0.0.1//' -e 's/0.0.0.0//' -e 's/^/0.0.0.0 /' -e 's/ \+/\t/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
+
+##Delete temporary file common_hosts.list
+rm /etc/DNSlock/common_hosts.list
