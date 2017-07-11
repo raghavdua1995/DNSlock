@@ -17,10 +17,10 @@ chmod 0777 /etc/DNSlock/blacklist
 ##Create hosts file: 'contentblock.list', dnsmasq will use contentblock.list as additional hosts file to block content
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
-##Create hosts file: 'blacklist.list',dnsmasq will use blacklist.list as additional hosts file to blacklist domains
+##Create hosts file: 'blacklist.list', dnsmasq will use blacklist.list as additional hosts file to blacklist domains
 touch /etc/DNSlock/blacklist.list
 chmod 0777 /etc/DNSlock/blacklist.list
-##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers.
+##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
 rm /etc/resolv.conf
 wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 ##Download list containing hosts files sources
