@@ -29,7 +29,7 @@ done
 rm /etc/DNSlock/contentblock.list
 
 echo "Merging Lists"
-sudo sed -e 's/\r//' -e 's/127.0.0.1//' -e 's/0.0.0.0//' -e 's/^/0.0.0.0 /' -e 's/[[:space:]]*//g' -e 's/0.0.0.0/0.0.0.0	/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
+sudo sed -e 's/\r//' -e 's/127.0.0.1//' -e 's/0.0.0.0//'  -e 's/[[:space:]]*//g' -e 's/^/0.0.0.0	/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
 
 echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 
