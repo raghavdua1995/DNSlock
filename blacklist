@@ -9,6 +9,8 @@ for i; do
  		else
 			echo "Adding $i to blacklist"
 			echo "0.0.0.0		$i" >> /etc/DNSlock/blacklist.list
+			##Restart DNSMASQ
+			service dnsmasq restart			
 		fi
 	else
 		echo "Please Enter a valid domain name"
