@@ -15,5 +15,5 @@ chmod 0777 /etc/DNSlock/blacklist.list
 rm /etc/resolv.conf
 wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
-wget -O /etc/DNSlock/pull https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
+wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
