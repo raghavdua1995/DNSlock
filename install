@@ -1,19 +1,31 @@
 #!/bin/bash
+##Installation script for DNSlock
+
+##Install DNSMASQ
 apt-get install dnsmasq
+##Backup dnsmasq default config file
 mv /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
+##Download preconfigured dnsmasq config file
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
 export PATH=/etc/DNSlock/:$PATH
+##Download control script and make it executable
 wget -O /etc/DNSlock/DNSlock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
 chmod 0777 /etc/DNSlock/DNSlock
+##Download domain blacklisting script and make it executable
 wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
 chmod 0777 /etc/DNSlock/blacklist
+##Create hosts file: 'contentblock.list',dnsmasq will use contentblock.list as additional hosts file to block conten
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
+##Create hosts file: 'blacklist.list',dnsmasq will use blacklist.list as additional hosts file to blacklist domains
 touch /etc/DNSlock/blacklist.list
 chmod 0777 /etc/DNSlock/blacklist.list
+##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers.
 rm /etc/resolv.conf
 wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
+##Download list containing hosts files sources
 wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
+##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
