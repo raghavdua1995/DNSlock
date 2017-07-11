@@ -33,3 +33,14 @@ ln -s /etc/DNSlock/DNSlock /usr/local/bin/DNSlock
 ##Update contentblock.list and restart DNSMASQ
 DNSlock --update
 service dnsmasq restart
+##Install cronjob to daily update contentblock.list
+#!/bin/bash
+crontab -l > temp_cron
+if grep -q "@daily DNSlock --update" "temp_cron";
+then
+crontab temp_cron
+else
+echo "@daily DNSlock --update" >> temp_cron
+crontab temp_cron
+rm temp_cron
+fi
