@@ -8,7 +8,6 @@ mv /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
 ##Download preconfigured dnsmasq config file
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
-export PATH=/etc/DNSlock/:$PATH
 ##Download control script and make it executable
 wget -O /etc/DNSlock/DNSlock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
 chmod 0777 /etc/DNSlock/DNSlock
@@ -29,5 +28,7 @@ wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua199
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
+##Create symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
+ln -s /etc/DNSlock/DNSlock /usr/local/bin/DNSlock
 ##Restart DNSMASQ
 service dnsmasq restart
