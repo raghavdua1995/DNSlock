@@ -38,8 +38,10 @@ rm /etc/DNSlock/contentblock.list
 ##Delete any leftover trailing blanks
 ##Sort and remove duplicate entries
 ##Store merged entries in contentblock.list( Additional hosts file being used by DNSMASQ to block content )
+##Remove first 2 lines ( that is: 0.0.0.0 and 0.0.0.0 0.0.0.0)
 echo "Merging Lists"
 sudo sed -e 's/\r//' -e 's/127.0.0.1//' -e 's/0.0.0.0//'  -e 's/[[:space:]]*//g' -e 's/^/0.0.0.0	/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
+sudo sed -i '1,2d' /etc/DNSlock/contentblock.list
 
 echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 
