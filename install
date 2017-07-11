@@ -1,6 +1,6 @@
 #!/bin/bash
 apt-get install dnsmasq
-mov /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
+mv /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
 export PATH=/etc/DNSlock/:$PATH
