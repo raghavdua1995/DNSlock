@@ -1,0 +1,8 @@
+#!/bin/bash
+##Removal script for DNSlock
+
+##Remove DNSMASQ
+echo y | apt-get purge dnsmasq
+rm -R /etc/DNSlock/
+##Remove symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
+rm /usr/local/bin/DNSlock
