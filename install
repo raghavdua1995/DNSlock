@@ -4,7 +4,7 @@
 ##Install DNSMASQ
 echo y | apt-get install dnsmasq
 ##Backup dnsmasq default config file
-mv /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
+mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 ##Download preconfigured dnsmasq config file
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
