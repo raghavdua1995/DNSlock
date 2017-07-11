@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ $1 == "--update" ]
+then
+sudo /etc/DNSlock/update
+
+elif    [ $1 == "--start" ]
+	then
+	sudo service dnsmasq start
+
+elif    [ $1 == "--stop" ]
+        then
+        sudo service dnsmasq stop
+
+elif    [ $1 == "--restart" ]
+        then
+        sudo service dnsmasq restart
+
+elif    [ $1 == "--status" ]
+        then
+        systemctl is-active dnsmasq.service
+elif    [ $1 == "--blacklist" ]
+	then
+	for i; do
+		if [ $i != "--blacklist" ]
+		then
+		sudo /home/raghav/blacklist "$i"
+		fi
+	done
+fi

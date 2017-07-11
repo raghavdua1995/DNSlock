@@ -1,0 +1,19 @@
+#!/bin/bash
+apt-get install dnsmasq
+mov /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
+wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
+mkdir /etc/DNSlock
+export PATH=/etc/DNSlock/:$PATH
+wget -O /etc/DNSlock/Dnslock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
+chmod 0777 /etc/DNSlock/DNSlock
+wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
+chmod 0777 /etc/DNSlock/blacklist
+touch /etc/DNSlock/contentblock.list
+chmod 0777 /etc/DNSlock/contentblock.list
+touch /etc/DNSlock/blacklist.list
+chmod 0777 /etc/DNSlock/blacklist.list
+rm /etc/resolv.conf
+wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
+wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
+wget -O /etc/DNSlock/pull https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
+chmod 0777 /etc/DNSlock/update
