@@ -29,3 +29,5 @@ wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua199
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
+##Restart DNSMASQ
+service dnsmasq restart
