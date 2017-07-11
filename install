@@ -14,7 +14,7 @@ chmod 0777 /etc/DNSlock/DNSlock
 ##Download domain blacklisting script and make it executable
 wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
 chmod 0777 /etc/DNSlock/blacklist
-##Create hosts file: 'contentblock.list',dnsmasq will use contentblock.list as additional hosts file to block conten
+##Create hosts file: 'contentblock.list', dnsmasq will use contentblock.list as additional hosts file to block content
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
 ##Create hosts file: 'blacklist.list',dnsmasq will use blacklist.list as additional hosts file to blacklist domains
