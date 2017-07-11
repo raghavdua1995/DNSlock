@@ -1,11 +1,11 @@
 #!/bin/bash
 
-##Create temporary file where domains from various host file will me written.
+##Create temporary file where domains from various host file will be written.
 touch /etc/DNSlock/common_hosts.list
 
 n=1;
 
-##For loop to download hosts from sources mentioned in sources.list. If download succedes then loop will create new cached list and delete the backup cached list other$
+##For loop to download hosts from sources mentioned in sources.list. If download succedes then loop will create new cached list and delete the backup cached list otherwise restore backup cached list
 
 for i in $(cat /etc/DNSlock/sources.list); do
 cp /etc/DNSlock/cache _$n.list /etc/DNSlock/cache _$n.list.bak 2>>/dev/null;
@@ -21,7 +21,7 @@ mov /etc/DNSlock/cache _$n.list.bak /etc/DNSlock/cache _$n.list 2>>/dev/null
 fi
 done
 
-##Copying content from cached lists to common_hosts.list.
+##Copying content from cached lists to common_hosts.list
 for((k=1;k<n;k++)); do
 cat /etc/DNSlock/cache_$k.list >> /etc/DNSlock/common_hosts.list;
 done
