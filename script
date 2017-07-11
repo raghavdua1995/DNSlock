@@ -27,7 +27,7 @@ cat /etc/DNSlock/cache_$k.list >> /etc/DNSlock/common_hosts.list;
 done
 
 echo "Merging Lists"
-sudo sed -e 's/\r//' -e '/^127.0.0.1/!d' -e 's/127.0.0.1//' -e 's/0.0.0.0//' -e 's/^/0.0.0.0 /' -e 's/ \+/\t/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hos$
+sudo sed -e 's/\r//' -e '/^127.0.0.1/!d' -e 's/127.0.0.1//' -e 's/0.0.0.0//' -e 's/^/0.0.0.0 /' -e 's/ \+/\t/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_host | sort -u > /etc/DNSlock/contentblock.list
 
 echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 
