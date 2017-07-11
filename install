@@ -4,7 +4,7 @@ mov /etc/dnsmasq.conf to /etc/dnsmasq.conf.bak
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
 export PATH=/etc/DNSlock/:$PATH
-wget -O /etc/DNSlock/Dnslock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
+wget -O /etc/DNSlock/DNSlock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
 chmod 0777 /etc/DNSlock/DNSlock
 wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
 chmod 0777 /etc/DNSlock/blacklist
