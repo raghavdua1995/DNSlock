@@ -24,7 +24,7 @@ elif    [ $1 == "--blacklist" ]
 	for i; do
 		if [ $i != "--blacklist" ]
 		then
-		sudo /home/raghav/blacklist "$i"
+		sudo /etc/DNSlock/blacklist "$i"
 		fi
 	done
 fi
