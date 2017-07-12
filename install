@@ -14,12 +14,18 @@ chmod 0777 /etc/DNSlock/DNSlock
 ##Download domain blacklisting script and make it executable
 wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
 chmod 0777 /etc/DNSlock/blacklist
+##Download domain whitelisting script and make it executable
+wget -O /etc/DNSlock/whitelist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/whitelist
+chmod 0777 /etc/DNSlock/whitelist
 ##Create hosts file: 'contentblock.list', dnsmasq will use contentblock.list as additional hosts file to block content
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
 ##Create hosts file: 'blacklist.list', dnsmasq will use blacklist.list as additional hosts file to blacklist domains
 touch /etc/DNSlock/blacklist.list
 chmod 0777 /etc/DNSlock/blacklist.list
+##Create file: 'whitelist.list', whitelisted domains will written in whitelist.list
+touch /etc/DNSlock/whitelist.list
+chmod 0777 /etc/DNSlock/whitelist.list
 ##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
 rm /etc/resolv.conf
 wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
