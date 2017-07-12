@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for i; do
-        if grep -P "^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$" <<< $i >> /dev/null;
+        if grep -P "^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$" <<< $i >> /dev/null;
         then
                 if grep -q "$i" "/etc/DNSlock/whitelist.list";
                 then
@@ -10,11 +10,11 @@ for i; do
                         echo "Adding $i to whitelist"
                         echo "$i" >> /etc/DNSlock/whitelist.list
 			sudo sed -i "/0.0.0.0	$i/d" /etc/DNSlock/contentblock.list
-                        ##Restart DNSMASQ
-                        service dnsmasq restart
                 fi
         else
                 echo "Please Enter a valid domain name"
         fi
 done
 
+##Restart DNSMASQ
+service dnsmasq restart
