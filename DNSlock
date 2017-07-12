@@ -27,4 +27,12 @@ elif    [ $1 == "--blacklist" ]
 		sudo /etc/DNSlock/blacklist "$i"
 		fi
 	done
+elif    [ $1 == "--whitelist" ]
+        then
+        for i; do
+                if [ $i != "--whitelist" ]
+                then
+                sudo /etc/DNSlock/whitelist "$i"
+                fi
+        done
 fi
