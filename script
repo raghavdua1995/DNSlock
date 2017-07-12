@@ -5,6 +5,14 @@ touch /etc/DNSlock/common_hosts.list
 
 n=1;
 
+##Ensuring hosts file sources are not blocked ( Unless explicitly blacklisted ) by whitelisting them.
+echo "Whitlisting hosts file sources"
+for i in $(cat /etc/DNSlock/sources.list); do
+domain+=" "
+domain+=`echo "$i" | sed -e 's|^[^/]*//||' -e '/^[^@]*@/s///' -e 's|/.*$||'`
+done
+DNSlock --whitelist $domain
+
 ##For loop to download hosts from sources mentioned in sources.list. If download succedes then loop will create new cached list and delete the backup cached list other$
 
 for i in $(cat /etc/DNSlock/sources.list); do
@@ -53,6 +61,4 @@ echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 ##Delete temporary file common_hosts.list
 rm /etc/DNSlock/common_hosts.list
 
-##Restarting DNSMASQ
-echo "Restarting DNSMASQ"
 service dnsmasq restart
