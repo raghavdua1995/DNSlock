@@ -17,6 +17,9 @@ chmod 0777 /etc/DNSlock/blacklist
 ##Download domain whitelisting script and make it executable
 wget -O /etc/DNSlock/whitelist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/whitelist
 chmod 0777 /etc/DNSlock/whitelist
+##Download domain wildcard blacklistng script and make it executable
+wget -O /etc/DNSlock/wildcard https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/wildcard
+chmod 0777 /etc/DNSlock/wildcard
 ##Create hosts file: 'contentblock.list', dnsmasq will use contentblock.list as additional hosts file to block content
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
