@@ -37,4 +37,14 @@ elif    [ $1 == "--whitelist" ]
                 fi
         done
 	sudo /etc/DNSlock/whitelist $whitelist_domains
+elif	[ $1 == "--wildcard" ]
+	then
+	for i; do
+		if [ $i != "--wildcard" ]
+                then
+		wildcard_domains+=" $i"
+		fi
+	done
+	sudo /etc/DNSlock/wildcard $wildcard_domains
+
 fi
