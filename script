@@ -52,3 +52,7 @@ echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 
 ##Delete temporary file common_hosts.list
 rm /etc/DNSlock/common_hosts.list
+
+##Restarting DNSMASQ
+echo "Restarting DNSMASQ"
+service dnsmasq restart
