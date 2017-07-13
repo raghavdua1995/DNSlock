@@ -1,2 +1,2 @@
 @daily root DNSlock --update
-59 11 * * * root truncate /var/log/DNSlock.log --size 0
+59 23 * * * root truncate /var/log/DNSlock.log --size 0
