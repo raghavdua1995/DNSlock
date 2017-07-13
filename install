@@ -30,8 +30,9 @@ chmod 0777 /etc/DNSlock/blacklist.list
 touch /etc/DNSlock/whitelist.list
 chmod 0777 /etc/DNSlock/whitelist.list
 ##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
+wget -O /etc/resolv.conf.downloaded https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 rm /etc/resolv.conf
-wget -O /etc/resolv.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
+mv /etc/resolv.conf.downloaded /etc/resolv.conf
 ##Download list containing hosts files sources
 wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
