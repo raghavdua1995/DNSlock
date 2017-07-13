@@ -49,4 +49,3 @@ echo "Installing Cronjobs"
 wget -O /etc/cron.d/DNSlock-cron https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock-cron
 chown root /etc/cron.d/DNSlock-cron
 chmod 0644 /etc/cron.d/DNSlock-cron
-fi
