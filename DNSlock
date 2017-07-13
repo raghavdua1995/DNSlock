@@ -52,5 +52,12 @@ elif	[ $1 == "--tail" ]
 elif 	[ $1 == "--flush" ]
 	then
 	sudo truncate /var/log/DNSlock.log --size 0
+elif	[ $1 == "--query" ]
+	then
+	echo "Searching in DNSlock's hosts file"
+	echo
+	grep --color -n -H "$2" "/etc/DNSlock/contentblock.list"
+	echo "Searching in blacklist file"
+	grep --color -n -H "$2" "/etc/DNSlock/blacklist.list"
 
 fi
