@@ -46,5 +46,11 @@ elif	[ $1 == "--wildcard" ]
 		fi
 	done
 	sudo /etc/DNSlock/wildcard $wildcard_domains
+elif	[ $1 == "--tail" ]
+	then
+	sudo tail -f /var/log/DNSlock.log
+elif 	[ $1 == "--flush" ]
+	then
+	sudo truncate /var/log/DNSlock.log --size 0
 
 fi
