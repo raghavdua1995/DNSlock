@@ -29,6 +29,8 @@ chmod 0777 /etc/DNSlock/blacklist.list
 ##Create file: 'whitelist.list', whitelisted domains will written in whitelist.list
 touch /etc/DNSlock/whitelist.list
 chmod 0777 /etc/DNSlock/whitelist.list
+##Download help file
+wget -O /etc/DNSlock/help https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/help
 ##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
 wget -O /etc/resolv.conf.downloaded https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 rm /etc/resolv.conf
