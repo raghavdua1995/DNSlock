@@ -1,0 +1,76 @@
+#!/bin/bash
+
+case "$1" in
+
+
+'--update') sudo /etc/DNSlock/update
+	  ;;
+
+
+'--start') sudo service dnsmasq start
+	  ;;
+
+
+'--stop') sudo service dnsmasq stop
+	  ;;
+
+
+'--restart') sudo service dnsmasq restart
+	  ;;
+
+
+'--status') systemctl is-active dnsmasq.service
+	  ;;
+
+
+'--blacklist') for i; do
+		 if [ $i != "--blacklist" ]
+		 then
+		 blacklist_domains+=" $i"
+		 fi
+	       done
+	       sudo /etc/DNSlock/blacklist $blacklist_domains
+	  ;;
+
+
+'--whitelist') for i; do
+                 if [ $i != "--whitelist" ]
+                 then
+		 whitelist_domains+=" $i"
+                 fi
+               done
+	       sudo /etc/DNSlock/whitelist $whitelist_domains
+	  ;;
+
+
+'--wildcard') for i; do
+		 if [ $i != "--wildcard" ]
+                 then
+		 wildcard_domains+=" $i"
+		 fi
+	      done
+	      sudo /etc/DNSlock/wildcard $wildcard_domains
+	  ;;
+
+
+'--tail') sudo tail -f /var/log/DNSlock.log
+	  ;;
+
+
+'--flush') sudo truncate /var/log/DNSlock.log --size 0
+	  ;;
+
+
+'--query') echo "Searching in DNSlock's hosts file"
+	   echo
+	   grep --color -n -H "$2" "/etc/DNSlock/contentblock.list"
+	   echo "Searching in blacklist file"
+	   grep --color -n -H "$2" "/etc/DNSlock/blacklist.list"
+	  ;;
+
+
+*) cat /etc/DNSlock/help
+	  ;;
+
+
+esac
