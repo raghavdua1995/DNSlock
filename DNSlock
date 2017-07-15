@@ -2,27 +2,27 @@
 
 case "$1" in
 
-
+##Calls update script to update hosts file
 '--update') sudo /etc/DNSlock/update
 	  ;;
 
-
+##Start dnsmasq
 '--start') sudo service dnsmasq start
 	  ;;
 
-
+##Stop dnsmasq
 '--stop') sudo service dnsmasq stop
 	  ;;
 
-
+##Restart dnsmasq
 '--restart') sudo service dnsmasq restart
 	  ;;
 
-
+##Check if dnsmasq is active or not
 '--status') systemctl is-active dnsmasq.service
 	  ;;
 
-
+##Call blacklist script to add domains specified in arguments to blacklist
 '--blacklist') for i; do
 		 if [ $i != "--blacklist" ]
 		 then
@@ -32,7 +32,7 @@ case "$1" in
 	       sudo /etc/DNSlock/blacklist $blacklist_domains
 	  ;;
 
-
+##Call whitelist script to add domains specified in arguments to whitelist
 '--whitelist') for i; do
                  if [ $i != "--whitelist" ]
                  then
@@ -42,7 +42,7 @@ case "$1" in
 	       sudo /etc/DNSlock/whitelist $whitelist_domains
 	  ;;
 
-
+##Call wildcard script to wildcard block domains specified in arguments
 '--wildcard') for i; do
 		 if [ $i != "--wildcard" ]
                  then
@@ -52,15 +52,15 @@ case "$1" in
 	      sudo /etc/DNSlock/wildcard $wildcard_domains
 	  ;;
 
-
+##Tail dnsmasq log
 '--tail') sudo tail -f /var/log/DNSlock.log
 	  ;;
 
-
+##Flush dnsmasq log
 '--flush') sudo truncate /var/log/DNSlock.log --size 0
 	  ;;
 
-
+##Search if a domain matching with the string passed as argument is in blacklist.list or in hosts file
 '--query') echo "Searching in DNSlock's hosts file"
 	   echo
 	   grep --color -n -H "$2" "/etc/DNSlock/contentblock.list"
@@ -68,7 +68,7 @@ case "$1" in
 	   grep --color -n -H "$2" "/etc/DNSlock/blacklist.list"
 	  ;;
 
-
+##Default case-displays help file
 *) cat /etc/DNSlock/help
 	  ;;
 
