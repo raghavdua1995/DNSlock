@@ -2,6 +2,7 @@
 ##Installation script for DNSlock
 
 ##Install DNSMASQ
+echo y | apt-get update
 echo y | apt-get install dnsmasq
 ##Backup dnsmasq default config file
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
