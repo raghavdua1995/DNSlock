@@ -1,0 +1,39 @@
+#!/bin/bash
+
+flag=0
+
+for i; do
+	if grep -q -x "$i" "/etc/DNSlock/whitelist.list";
+	then
+		sudo sed -i "/$i/d" /etc/DNSlock/whitelist.list
+		flag=1
+	else
+                echo "$i is not in whitelist"
+	fi
+done
+
+if [ $flag==0 ]
+then
+	sudo touch /etc/DNSlock/common_hosts.list
+	count=0
+	echo "Rebuilding List"
+
+	for k in $(cat /etc/DNSlock/sources.list); do
+	let "count++"
+	cat /etc/DNSlock/cache_$count.list >> /etc/DNSlock/common_hosts.list;
+	done
+
+
+	sudo sed -e 's/\r//' -e 's/127.0.0.1//' -e 's/0.0.0.0//'  -e 's/[[:space:]]*//g' -e 's/^/0.0.0.0	/' -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
+	sudo sed -i '1,2d' /etc/DNSlock/contentblock.list
+
+	##Remove whitelisted domains
+	for j in $(cat /etc/DNSlock/whitelist.list); do
+	sudo sed -i "/0.0.0.0   $j/d" /etc/DNSlock/contentblock.list
+	done
+
+	sudo rm /etc/DNSlock/common_hosts.list
+
+fi
+
+sudo service dnsmasq restart

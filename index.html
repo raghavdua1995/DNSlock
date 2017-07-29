@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DNSlock</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<script>
+function getDomain() {
+    var x = document.domain;
+    document.getElementById("domain").innerHTML = x;
+}
+function goBack() {
+    window.history.back();
+}
+</script>
+<style>
+#title		{
+			background-color: red;
+			height: 25%;
+			color: white;
+			font-weight: bold;
+			font-size: 500%;
+			border: 1px solid black;
+		}
+
+#message	{
+			background-color: #F4F6F6;
+			height: 25%;
+			border: 1px solid black;
+		}
+
+button		{	
+			border: 1px solid black;
+			border-radius: 4px;
+			font-weight: bold;
+			font-size: 125%;
+		}
+
+#footer		{	
+			position: absolute;
+			bottom: 0.5%;
+			width: 99%;
+			background-color: #F4F6F6;
+                        border: 1px solid black;
+		}	
+</style>
+</head>
+<body onload="getDomain()">
+<div id="wrapper">
+<div id="title">
+<center><h>ACCESS DENIED</h></center>
+</div>
+</br>
+<div id="message">
+<center>
+<p>You have been denied access to : <p id="domain" style="color:red"></p> because it is in violation of acceptable  internet usage policy set by the administrator.</p>
+<button onclick="goBack()">Go Back</button>
+</center>
+<hr>
+<center>
+<p>Contact network administrator for more information.</p>
+</center>
+</div>
+<div id="footer">
+<center>
+<p>Content filtering powered by <a href="https://github.com/raghavdua1995/DNSlock" target="_blank">DNSlock</a></p>
+</center>
+</div>
+</div>
+</body>
+</html>
