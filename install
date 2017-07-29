@@ -12,7 +12,7 @@ wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua199
 ##Let user select the interface on which lighttpd will listen on and set required environment variables
 echo "Select a interface for DNSlock to listen on, available interfaces are :"
 ls /sys/class/net
-read iface
+read iface < /dev/tty
 iface_ip="$(/sbin/ifconfig $iface | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
 sudo echo dnslock_iface=$iface >> /etc/environment
 sudo echo dnslock_iface_ip=$iface_ip >> /etc/environment
