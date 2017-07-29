@@ -4,6 +4,11 @@
 ##Install DNSMASQ
 echo y | apt-get update
 echo y | apt-get install dnsmasq
+##Install Lighttpd Web Server
+echo y | apt-get install lighttpd
+##Download Block page and favicon
+wget -O /var/www/html/index.html https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/index.html
+wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/favicon.ico
 ##Backup dnsmasq default config file
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 ##Download preconfigured dnsmasq config file
