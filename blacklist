@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for i; do
+	if grep -P "^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$" <<< $i >> /dev/null;
+	then
+		if grep -q -x "$dnslock_iface_ip	$i" "/etc/DNSlock/blacklist.list"; 
+		then
+        	echo "$i is already in the blacklist, no further action is required."
+ 		else
+			echo "Adding $i to blacklist"
+			echo "$dnslock_iface_ip	$i" >> /etc/DNSlock/blacklist.list
+		fi
+	else
+		echo "Please Enter a valid domain name"
+	fi
+done
+##Restart DNSMASQ
+service dnsmasq restart
