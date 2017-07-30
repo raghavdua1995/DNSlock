@@ -1,10 +1,10 @@
 #!/bin/bash
 for i; do
- 	if grep -q "address=/.$i/$dnslock_iface_ip" "/etc/dnsmasq.conf";
+ 	if grep -q "address=/.$i/0.0.0.0" "/etc/dnsmasq.conf";
  	then
  	echo "Domain is already wildcard blocked, no further action is required."
  	else
- 	echo "address=/.$i/$dnslock_iface_ip" >> /etc/dnsmasq.conf
+ 	echo "address=/.$i/0.0.0.0" >> /etc/dnsmasq.conf
  	fi
 done
 ##Restart DNSMASQ
