@@ -2,7 +2,7 @@
 
 ###### DNSlock is a DNS forwarder which can block content/advertisement/domains in your whole network
 
-#### Installation
+#### --> Installation
 
 Single command Installer:
 
@@ -13,7 +13,7 @@ Single command Installer:
 
 Note : The above installer downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/install).
 
-#### Commands
+#### --> Commands
 
 DNSlock uses the following commands: 
 
@@ -45,7 +45,7 @@ DNSlock uses the following commands:
 
 `DNSlock --query` : Query if a domain is being blocked`
 
-#### Hosts file sources
+#### --> Hosts file sources
 
 DNSlock's hosts file sources are mentioned in /etc/DNSlock/sources.list
 You can edit the file and add new sources using any text editor, we will be using nano editor in the following instructions:
@@ -54,7 +54,7 @@ You can edit the file and add new sources using any text editor, we will be usin
 2) Add link for the hosts file you want to add.
 3) `DNSlock --update` , Update hosts file
 
-#### Uninstallation
+#### --> Uninstallation
 
 Single command Uninstaller:
 
