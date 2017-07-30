@@ -4,18 +4,6 @@
 ##Install DNSMASQ
 echo y | apt-get update
 echo y | apt-get install dnsmasq
-##Install Lighttpd Web Server
-echo y | apt-get install lighttpd
-##Download Block page and favicon
-wget -O /var/www/html/index.html https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/index.html
-wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/favicon.ico
-##Let user select the interface on which lighttpd will listen on and set required environment variables
-echo "Select a interface for DNSlock to listen on, available interfaces are :"
-ls /sys/class/net
-read iface < /dev/tty
-iface_ip="$(/sbin/ifconfig $iface | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
-sudo echo dnslock_iface=$iface >> /etc/environment
-sudo echo dnslock_iface_ip=$iface_ip >> /etc/environment
 ##Backup dnsmasq default config file
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 ##Download preconfigured dnsmasq config file
