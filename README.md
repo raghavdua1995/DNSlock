@@ -46,6 +46,7 @@ DNSlock uses the following command:
 `DNSlock --query` : Query if a domain is being blocked`
 
 Uninstallation
+
 Single command Uninstaller:
 1) Get root permissions (sudo su)
 2) `curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/uninstall | bash`
