@@ -37,9 +37,9 @@ case "$1" in
 '--*blacklist')	for i; do
 		  if [ $i != "--*blacklist" ]
 		  then
-		  	if grep -q -x "$dnslock_iface_ip	$i" "/etc/DNSlock/blacklist.list";
+		  	if grep -q -x "0.0.0.0	$i" "/etc/DNSlock/blacklist.list";
                  	then
-			sudo sed -i "/$dnslock_iface_ip	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from blacklist"
+			sudo sed -i "/0.0.0.0	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from blacklist"
 			else
 			echo "Domain not found in blacklist"
 		  	fi
@@ -83,9 +83,9 @@ case "$1" in
 '--*wildcard') for i; do
                  if [ $i != "--*wildcard" ]
                  then
-                       if grep -q -x "address=/.$i/$dnslock_iface_ip" "/etc/dnsmasq.conf";
+                       if grep -q -x "address=/.$i/0.0.0.0" "/etc/dnsmasq.conf";
                        then
-                       sudo sed -i "\%address=/.$i/$dnslock_iface_ip%d" /etc/dnsmasq.conf && echo "$i removed from wildcard list"
+                       sudo sed -i "\%address=/.$i/0.0.0.0%d" /etc/dnsmasq.conf && echo "$i removed from wildcard list"
                        else
                        echo "Domain not found in wildcard"
                        fi
