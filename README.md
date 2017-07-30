@@ -65,4 +65,4 @@ Single command Uninstaller:
 Note : The above uninstaller downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/uninstall).
 
 ---
-<center>An open source project by <a href="https://raghavdua.in><b>Raghav Dua</b></a></center>
+<p align="center">An open source project by <a href="https://raghavdua.in><b>Raghav Dua</b></a><p>
