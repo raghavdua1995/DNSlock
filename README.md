@@ -1,5 +1,4 @@
 #DNSlock
-
 ----------
 #DNSmasq based network wide content/advertisement blocker for debian based operating system.
 ----------
