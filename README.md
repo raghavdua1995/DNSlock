@@ -2,7 +2,7 @@
 
 #### DNSlock is a DNS forwarder which can block content/advertisement/domains in your whole network
 
-##### Installation
+##### __Installation__
 
 Single command Installer:
 
