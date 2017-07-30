@@ -47,13 +47,14 @@ DNSlock uses the following command:
 
 `DNSlock --query` : Query if a domain is being blocked`
 
-Hosts file sources-
+Hosts file sources
+
 DNSlock's hosts file sources are mentioned in /etc/DNSlock/sources.list
 You can edit the file and add new sources using any text editor, we will be using nano editor in the following instructions:
 
-1) 'sudo nano /etc/DNSlock/sources.list' , Enter password if prompted.
+1) `sudo nano /etc/DNSlock/sources.list` , Enter password if prompted.
 2) Add link for the hosts file you want to add.
-3) 'DNSlock --update' , Update hosts file
+3) `DNSlock --update` , Update hosts file
 
 Uninstallation-
 
