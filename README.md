@@ -2,7 +2,7 @@
 
 #### DNSlock is a DNS forwarder which can block content/advertisement/domains in your whole network
 
-###### Installation
+##### Installation
 
 Single command Installer:
 
@@ -50,15 +50,15 @@ DNSlock uses the following commands:
 DNSlock's hosts file sources are mentioned in /etc/DNSlock/sources.list
 You can edit the file and add new sources using any text editor, we will be using nano editor in the following instructions:
 
-1)`sudo nano /etc/DNSlock/sources.list` , Enter password if prompted.
+1) `sudo nano /etc/DNSlock/sources.list` , Enter password if prompted.
 2) Add link for the hosts file you want to add.
-3)`DNSlock --update` , Update hosts file
+3) `DNSlock --update` , Update hosts file
 
 ##### Uninstallation-
 
 Single command Uninstaller:
 1) Get root permissions (sudo su)
-2)`curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/uninstall | bash`
+2) `curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/uninstall | bash`
 3) Configure your devices/router(for network wide content blocking) to use some other DNS server (like the one provided by your ISP or Google's DNS server).
 
 Note : The above uninstaller downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/uninstall).
