@@ -8,7 +8,7 @@ for i; do
         	echo "$i is already in the blacklist, no further action is required."
  		else
 			echo "Adding $i to blacklist"
-			echo "$dnslock_iface_ip	$i" >> /etc/DNSlock/blacklist.list
+			echo "0.0.0.0.0	$i" >> /etc/DNSlock/blacklist.list
 		fi
 	else
 		echo "Please Enter a valid domain name"
