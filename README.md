@@ -5,8 +5,7 @@ DNSmasq based network wide content/advertisement blocker for debian based operat
 ----------
 DNSlock is a DNS forwarder which can block content/advertisement/domains in your whole network
 
-Installation
-Single command Installer:
+Installation  Single command Installer:
 1) Make sure the device or server on which you want to install DNSlock have a static IP address.
 2) Get root permissions (sudo su)
 3) `curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/install | bash`
