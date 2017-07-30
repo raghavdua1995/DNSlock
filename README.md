@@ -1,7 +1,7 @@
 #DNSlock
 
 ----------
-###DNSmasq based network wide content/advertisement blocker for debian based operating system.
+#DNSmasq based network wide content/advertisement blocker for debian based operating system.
 ----------
 DNSlock is a DNS forwarder which can block content/advertisement/domains in your whole network
 
