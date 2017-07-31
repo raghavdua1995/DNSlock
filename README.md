@@ -54,6 +54,8 @@ You can edit the file and add new sources using any text editor, we will be usin
 2) Add link for the hosts file you want to add.
 3) `DNSlock --update` , Update hosts file
 
+You can add virtually any number of hosts file sources you want, [Filterlist](https://filterlists.com/) is a comprehensive directory of hosts files around the internet.
+
 #### --> Uninstallation
 
 Single command Uninstaller:
