@@ -61,6 +61,11 @@ for k in $(cat /etc/DNSlock/whitelist.list); do
 sudo sed -i "/0.0.0.0	$k/d" /etc/DNSlock/contentblock.list
 done
 
+##Block ipv6 content
+sudo cp /etc/DNSlock/contentblock.list /etc/DNSlock/contentblockipv6.list
+sudo sed -i 's/0.0.0.0/::1/' /etc/DNSlock/contentblockipv6.list
+
+
 echo "Blocking"  $(wc -l < /etc/DNSlock/contentblock.list) "Domains."
 
 ##Delete temporary file common_hosts.list
