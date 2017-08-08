@@ -1,0 +1,14 @@
+##ipv4
+216.239.38.120	www.google.com
+216.239.38.119	www.youtube.com
+216.239.38.119	m.youtube.com
+216.239.38.119	youtubei.googleapis.com
+216.239.38.119	youtube.googleapis.com
+216.239.38.119	www.youtube-nocookie.com
+
+##ipv6
+2001:4860:4802:32::77	www.youtube.com
+2001:4860:4802:32::77	m.youtube.com
+2001:4860:4802:32::77	youtubei.googleapis.com
+2001:4860:4802:32::77	youtube.googleapis.com
+2001:4860:4802:32::77	www.youtube-nocookie.com
