@@ -3,6 +3,7 @@
 
 ##Remove DNSMASQ and purge configuration files
 echo y | apt-get purge dnsmasq
+echo y | apt-get purge lighttpd
 ##Delete DNDlock directory
 rm -R /etc/DNSlock/
 ##Remove symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
