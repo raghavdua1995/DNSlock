@@ -41,6 +41,7 @@ rm /etc/resolv.conf
 mv /etc/resolv.conf.downloaded /etc/resolv.conf
 ##Download list containing hosts files sources
 wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
+chmod 0777 /etc/DNSlock/sources.list
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
