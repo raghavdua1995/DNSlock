@@ -106,10 +106,12 @@ case "$1" in
 	 
 ##Enforce safe search on Google and Youtube
 '--forcesafesearch') sudo sed -i 's|#addn-hosts=/etc/DNSlock/safesearch.list|addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  	     sudo service dnsmasq restart
 	  ;;
 
 ##Disable enforcing safe search on Google and Youtube
 '--disablesafesearch') sudo sed -i 's|addn-hosts=/etc/DNSlock/safesearch.list|#addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  	       sudo service dnsmasq restart
 	  ;;
 	 
 ##Tail dnsmasq log
