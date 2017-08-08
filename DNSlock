@@ -1,0 +1,138 @@
+
+#!/bin/bash
+
+case "$1" in
+
+##Calls update script to update hosts file
+'--update') sudo /etc/DNSlock/update
+	  ;;
+
+##Start dnsmasq
+'--start') sudo service dnsmasq start
+	  ;;
+
+##Stop dnsmasq
+'--stop') sudo service dnsmasq stop
+	  ;;
+
+##Restart dnsmasq
+'--restart') sudo service dnsmasq restart
+	  ;;
+
+##Check if dnsmasq is active or not
+'--status') bcount=$(sudo grep -c "is 0.0.0.0" "/var/log/DNSlock.log")
+	    qcount=$(sudo grep -c "query" "/var/log/DNSlock.log")
+	    echo "DNSlock status: $( systemctl is-active dnsmasq.service)"
+	    echo "Queries Blocked: $bcount"
+	    echo "Total Queries: $qcount"
+	    if [ $qcount == 0 ]
+	    then
+	    echo "0% of total queries blocked"
+	    else 
+	    echo "$(echo  | awk "{print $bcount / $qcount * 100}")% of total queries blocked"
+	    fi
+	  ;;
+
+##Call blacklist script to add domains specified in arguments to blacklist
+'--blacklist') for i; do
+		 if [ $i != "--blacklist" ]
+		 then
+		 blacklist_domains+=" $i"
+		 fi
+	       done
+	       sudo /etc/DNSlock/blacklist $blacklist_domains
+	  ;;
+
+##Remove domain specified in arguments from blacklist
+'--*blacklist')	for i; do
+		  if [ $i != "--*blacklist" ]
+		  then
+		  	if grep -q -x "0.0.0.0	$i" "/etc/DNSlock/blacklist.list";
+                 	then
+			sudo sed -i "/0.0.0.0	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from blacklist"
+			else
+			echo "Domain not found in blacklist"
+		  	fi
+		  fi
+		done
+		sudo service dnsmasq restart
+	  ;;
+
+##Call whitelist script to add domains specified in arguments to whitelist
+'--whitelist') for i; do
+                 if [ $i != "--whitelist" ]
+                 then
+		 whitelist_domains+=" $i"
+                 fi
+               done
+	       sudo /etc/DNSlock/whitelist $whitelist_domains
+	  ;;
+
+##Remove domains specified in arguments from whitelist
+'--*whitelist') for i; do
+                 if [ $i != "--*whitelist" ]
+                 then
+                 whitelistRM_domains+=" $i"
+                 fi
+               done
+               sudo /etc/DNSlock/RemoveWL $whitelistRM_domains
+          ;;
+
+
+##Call wildcard script to wildcard block domains specified in arguments
+'--wildcard') for i; do
+		 if [ $i != "--wildcard" ]
+                 then
+		 wildcard_domains+=" $i"
+		 fi
+	      done
+	      sudo /etc/DNSlock/wildcard $wildcard_domains
+	  ;;
+
+##Remove domains specified in arguments from wildcard
+'--*wildcard') for i; do
+                 if [ $i != "--*wildcard" ]
+                 then
+                       if grep -q -x "address=/.$i/0.0.0.0" "/etc/dnsmasq.conf";
+                       then
+                       sudo sed -i "\%address=/.$i/0.0.0.0%d" /etc/dnsmasq.conf && echo "$i removed from wildcard list"
+                       else
+                       echo "Domain not found in wildcard"
+                       fi
+                 fi
+               done
+               sudo service dnsmasq restart
+         ;;
+	 
+##Enforce safe search on Google and Youtube
+'--forcesafesearch') sudo sed -i 's|#addn-hosts=/etc/DNSlock/safesearch.list|addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  	     sudo service dnsmasq restart
+	  ;;
+
+##Disable enforcing safe search on Google and Youtube
+'--disablesafesearch') sudo sed -i 's|addn-hosts=/etc/DNSlock/safesearch.list|#addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  	       sudo service dnsmasq restart
+	  ;;
+	 
+##Tail dnsmasq log
+'--tail') sudo tail -f /var/log/DNSlock.log
+	  ;;
+
+##Flush dnsmasq log
+'--flush') sudo truncate /var/log/DNSlock.log --size 0
+	  ;;
+
+##Search if a domain matching with the string passed as argument is in blacklist.list or in hosts file
+'--query') echo "Searching in DNSlock's hosts file"
+	   echo
+	   grep --color -n -H "$2" "/etc/DNSlock/contentblock.list"
+	   echo "Searching in blacklist file"
+	   grep --color -n -H "$2" "/etc/DNSlock/blacklist.list"
+	  ;;
+
+##Default case-displays help file
+*) cat /etc/DNSlock/help
+	  ;;
+
+
+esac
