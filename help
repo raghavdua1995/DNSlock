@@ -24,9 +24,9 @@ DNSlock --wildcard <domain1> <domain2> ..... : Wildcard block domains
 
 DNSlock --*wildcard <domain1> <domain2> ..... : Remove domains from wildcard list
 
-DNSlock --forcesafesearch ..... : Enforce safe search on Google and Youtube.
+DNSlock --forcesafesearch ..... : Enforce safe search on Google and Youtube
 
-DNSlock --disablesafesearch <domain1> <domain2> ..... : Stop enforcing safe search on Google and Youtube.
+DNSlock --disablesafesearch <domain1> <domain2> ..... : Stop enforcing safe search on Google and Youtube
 
 DNSlock --tail : Tail DNSlock logs
 
