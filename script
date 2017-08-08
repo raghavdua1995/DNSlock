@@ -1,5 +1,9 @@
 #!/bin/bash
 
+##Removing duplicates from sources.list ( Hosts file sources list).
+sudo awk '!a[$0]++' /etc/DNSlock/sources.list > /tmp/sources.list && cp /tmp/sources.list /etc/DNSlock/
+sudo rm /tmp/sources.list
+
 ##Create temporary file where domains from various host file will me written.
 touch /etc/DNSlock/common_hosts.list
 
