@@ -39,11 +39,15 @@ DNSlock uses the following commands:
 
 `DNSlock --*wildcard <domain1> <domain2> ..... ` : Remove domains from wildcard list
 
+`DNSlock --forcesafesearch` : Enforce safe search on Google and Youtube
+
+`DNSlock --disablesafesearch` : Stop enforcing safe search on Google and Youtube.
+
 `DNSlock --tail` : Tail DNSlock logs
 
 `DNSlock --flush` : Flush DNSlock logs
 
-`DNSlock --query` : Query if a domain is being blocked`
+`DNSlock --query` : Query if a domain is being blocked
 
 #### --> Hosts file sources
 
