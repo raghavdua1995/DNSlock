@@ -103,7 +103,15 @@ case "$1" in
                done
                sudo service dnsmasq restart
          ;;
+	 
+##Enforce safe search on Google and Youtube
+'--forcesafesearch') sudo sed -i 's|#addn-hosts=/etc/DNSlock/safesearch.list|addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  ;;
 
+##Disable enforcing safe search on Google and Youtube
+'--disablesafesearch') sudo sed -i 's|addn-hosts=/etc/DNSlock/safesearch.list|#addn-hosts=/etc/DNSlock/safesearch.list|' /etc/dnsmasq.conf
+	  ;;
+	 
 ##Tail dnsmasq log
 '--tail') sudo tail -f /var/log/DNSlock.log
 	  ;;
