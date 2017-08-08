@@ -8,6 +8,8 @@ echo y | apt-get install dnsmasq
 echo y | apt-get install lighttpd
 wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/favicon.ico
 wget -O /var/www/html/index.html https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/index.html
+sudo chmod 0777 /etc/lighttpd/lighttpd.conf
+sudo echo 'server.error-handler-404   = "/index.html"' >> /etc/lighttpd/lighttpd.conf
 echo "Select a interface for DNSlock to listen on, available interfaces are :"
 ls /sys/class/net
 read iface < /dev/tty
@@ -71,3 +73,4 @@ echo "Installing Cronjobs"
 wget -O /etc/cron.d/DNSlock-cron https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock-cron
 chown root /etc/cron.d/DNSlock-cron
 chmod 0644 /etc/cron.d/DNSlock-cron
+echo "Restart system for changes to take effect"
