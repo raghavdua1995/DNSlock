@@ -63,9 +63,10 @@ wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSl
 chmod 0777 /etc/DNSlock/update
 ##Create symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
 ln -s /etc/DNSlock/DNSlock /usr/local/bin/DNSlock
-##Update contentblock.list and restart DNSMASQ
+##Update contentblock.list, restart DNSMASQ, restart lighttpd
 DNSlock --update
 service dnsmasq restart
+service lighttpd restart
 ##Install cronjob to:
 #Update contentblock.list daily
 #Delete log at 23:59 daily
