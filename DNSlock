@@ -47,12 +47,19 @@ case "$1" in
 '--*blacklist')	for i; do
 		  if [ $i != "--*blacklist" ]
 		  then
-		  	if grep -q -x "$dnslock_iface_ip	$i" "/etc/DNSlock/blacklist.list";
-                 	then
-			sudo sed -i "/$dnslock_iface_ip	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from blacklist"
+			if grep -q -x "$dnslock_iface_ip	$i" "/etc/DNSlock/blacklist.list";
+			then
+				sudo sed -i "/$dnslock_iface_ip	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from IPv4 blacklist"
 			else
-			echo "Domain not found in blacklist"
-		  	fi
+				echo "$i not found in the IPv4 blacklist, checking in IPv6 blacklist"
+			fi
+
+			if grep -q -x "$dnslock_iface_ipv6	$i" "/etc/DNSlock/blacklist.list";
+			then
+				sudo sed -i "/$dnslock_iface_ipv6	$i/d" /etc/DNSlock/blacklist.list && echo "$i removed from IPv6 blacklist"
+			else
+				echo "$i not found in the IPv6 blacklist"
+			fi
 		  fi
 		done
 		sudo service dnsmasq restart
