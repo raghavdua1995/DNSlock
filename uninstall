@@ -4,11 +4,22 @@
 ##Remove DNSMASQ and purge configuration files
 echo y | apt-get purge dnsmasq
 echo y | apt-get purge lighttpd
+
 ##Delete DNDlock directory
 rm -R /etc/DNSlock/
+
 ##Remove symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
 rm /usr/local/bin/DNSlock
+
 ##Delete log file
 rm /var/log/DNSlock.log
+
 ##Delete cron jobs
 rm /etc/cron.d/DNSlock-cron
+
+##Remove environment variables
+sudo sed -i "/$dnslock_iface/d" /etc/environment
+sudo sed -i "/$dnslock_iface_ip/d" /etc/environment
+sudo sed -i "/$dnslock_iface_ipv6/d" /etc/environment
+
+echo "Please restart the system for changes to take effect"
