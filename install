@@ -62,6 +62,7 @@ chmod 0777 /etc/DNSlock/whitelist.list
 
 ##Download help file
 wget -O /etc/DNSlock/help https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/help
+
 ##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
 wget -O /etc/resolv.conf.downloaded https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 rm /etc/resolv.conf
@@ -73,9 +74,10 @@ chmod 0777 /etc/DNSlock/sources.list
 
 ##Download safesearch hosts file
 wget -O /etc/DNSlock/safesearch.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/safesearch.list
-##Download script to update DNSlock IP address/Interface
-wget -O /etc/DNSlock/setIP https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/setIP
-chmod 0777 /etc/DNSlock/setIP
+
+##Download script to completely/partially reset DNSlock
+wget -O /etc/DNSlock/reset https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/reset
+chmod 0777 /etc/DNSlock/reset
 
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
