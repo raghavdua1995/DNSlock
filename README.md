@@ -11,7 +11,7 @@ Single command Installer:
 3) `curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/install | bash`
 4) Configure your devices/router(for network wide content blocking) to use DNSlock as it's primary DNS server
 
-Note : The above installer downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/install).
+**Note :** The above installer downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/install).
 
 #### --> Commands
 
@@ -57,7 +57,7 @@ DNSlock uses the following commands:
 
 `DNSlock --reset complete` : Performs a full reset
 
-**Note:** DNSlock --reset can accept multiple arguments
+**Note :** DNSlock --reset can accept multiple arguments
 
 `DNSlock --tail` : Tail DNSlock logs
 
@@ -84,7 +84,7 @@ Single command Uninstaller:
 2) `curl https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/uninstall | bash`
 3) Configure your devices/router(for network wide content blocking) to use some other DNS server (like the one provided by your ISP or Google's DNS server).
 
-Note : The above uninstaller downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/uninstall).
+**Note :** The above uninstaller downloads this [script](https://github.com/raghavdua1995/DNSlock/blob/master/uninstall).
 
 ---
 <p align="center">An open source project by <a href="https://raghavdua.in" target="_blank">Raghav Dua</a>.<p>
