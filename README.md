@@ -43,6 +43,8 @@ DNSlock uses the following commands:
 
 `DNSlock --disablesafesearch` : Stop enforcing safe search on Google and Youtube.
 
+`DNSlock --setIP` : Update DNSmasq IP address/Interface
+
 `DNSlock --tail` : Tail DNSlock logs
 
 `DNSlock --flush` : Flush DNSlock logs
