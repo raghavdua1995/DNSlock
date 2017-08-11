@@ -47,9 +47,9 @@ DNSlock uses the following commands:
 
 1)**dnsmasq-** Resets dnsmasq server to default settings
 
-2)**sources-** Replaces hosts file sources list with default one
+2)**sources-** Replaces hosts file sources list with the default one
 
-3)**webserver-** Resets lighttpd web server to default settings
+3)**webserver-** Restores lighttpd web server's default settings
 
 4)**blacklist-** Removes all user blacklisted domains
 
