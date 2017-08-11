@@ -45,12 +45,19 @@ DNSlock uses the following commands:
 
 `DNSlock --reset <module1> <module2> .....` : Completely/Partially Reset DNSlock. Reset command accepts the following arguments as modules:<br>
 
-1)**dnsmasq-** Resets dnsmasq server to default settings<br>
-2)**sources-** Replaces hosts file sources list with default one<br>
-3)**webserver-** Resets lighttpd web server to default settings<br>
-4)**blacklist-** Removes all user blacklisted domains<br>
-5)**whitelist-** Removes all user whitelisted domains<br>
-6)**ip-** Resets/Updates DNSlock's IP address/Interface<br>
+1)**dnsmasq-** Resets dnsmasq server to default settings
+
+2)**sources-** Replaces hosts file sources list with default one
+
+3)**webserver-** Resets lighttpd web server to default settings
+
+4)**blacklist-** Removes all user blacklisted domains
+
+5)**whitelist-** Removes all user whitelisted domains
+
+6)**ip-** Resets/Updates DNSlock's IP address/Interface
+
+7)**complete-** Performs a full reset
 
 `DNSlock --tail` : Tail DNSlock logs
 
