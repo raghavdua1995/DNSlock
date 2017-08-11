@@ -43,21 +43,21 @@ DNSlock uses the following commands:
 
 `DNSlock --disablesafesearch` : Stop enforcing safe search on Google and Youtube.
 
-`DNSlock --reset <module1> <module2> .....` : Completely/Partially Reset DNSlock. Reset command accepts the following arguments as modules:<br>
+`DNSlock --reset dnsmasq` : Resets dnsmasq server to default settings
 
-1)**dnsmasq-** Resets dnsmasq server to default settings
+`DNSlock --reset sources` : Replaces hosts file sources list with the default one
 
-2)**sources-** Replaces hosts file sources list with the default one
+`DNSlock --reset webserver` : Restores lighttpd web server's default settings
 
-3)**webserver-** Restores lighttpd web server's default settings
+`DNSlock --reset blacklist` : Removes all user blacklisted domains
 
-4)**blacklist-** Removes all user blacklisted domains
+`DNSlock --reset whitelist` : Removes all user whitelisted domains
 
-5)**whitelist-** Removes all user whitelisted domains
+`DNSlock --reset ip` : Resets/Updates DNSlock's IP address/Interface
 
-6)**ip-** Resets/Updates DNSlock's IP address/Interface
+`DNSlock --reset complete` : Performs a full reset
 
-7)**complete-** Performs a full reset
+**Note:** DNSlock --reset can accept multiple arguments
 
 `DNSlock --tail` : Tail DNSlock logs
 
