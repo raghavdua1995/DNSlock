@@ -58,6 +58,9 @@ wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua199
 chmod 0777 /etc/DNSlock/sources.list
 ##Download safesearch hosts file
 wget -O /etc/DNSlock/safesearch.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/safesearch.list
+##Download script to reset DNSlock IP address/Interface
+wget -O /etc/DNSlock/setIP https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/setIP
+chmod 0777 /etc/DNSlock/setIP
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
