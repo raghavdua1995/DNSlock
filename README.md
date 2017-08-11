@@ -29,21 +29,27 @@ DNSlock uses the following commands:
 
 `DNSlock --blacklist <domain1> <domain2> ..... ` : Blacklist domains 
 
-`DNSlock --*blacklist <domain1> <domain2> ..... ` : Remove domains from blacklist
+`DNSlock --*blacklist <domain1> <domain2> .....` : Remove domains from blacklist
 
-`DNSlock --whitelist <domain1> <domain2> ..... ` : Whitelist domains
+`DNSlock --whitelist <domain1> <domain2> .....` : Whitelist domains
 
 `DNSlock --*whitelist <domain1> <domain2> ..... ` : Remove domains from whitelist
 
-`DNSlock --wildcard <domain1> <domain2> ..... ` : Wildcard block domains
+`DNSlock --wildcard <domain1> <domain2> .....` : Wildcard block domains
 
-`DNSlock --*wildcard <domain1> <domain2> ..... ` : Remove domains from wildcard list
+`DNSlock --*wildcard <domain1> <domain2> .....` : Remove domains from wildcard list
 
 `DNSlock --forcesafesearch` : Enforce safe search on Google and Youtube
 
 `DNSlock --disablesafesearch` : Stop enforcing safe search on Google and Youtube.
 
-`DNSlock --setIP` : Update DNSmasq IP address/Interface
+`DNSlock --reset <module1> <module2> .....` : Completely/Partially Reset DNSlock. Reset command accepts the following arguments as modules:
+dnsmasq- Resets dnsmasq server to default settings
+sources- Replaces hosts file sources list with default one
+webserver- Resets lighttpd web server to default settings
+blacklist- Removes all user blacklisted domains
+whitelist- Removes all user whitelisted domains
+ip- Resets/Updates DNSlock's IP address/Interface
 
 `DNSlock --tail` : Tail DNSlock logs
 
