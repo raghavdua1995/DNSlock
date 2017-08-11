@@ -121,8 +121,14 @@ case "$1" in
 	  	       sudo service dnsmasq restart
 	  ;;
 
-##Update DNSlock IP address/Interface
-'--setIP') sudo /etc/DNSlock/setIP
+##Completely/Partially Reset DNSlock
+'--reset') for i; do
+	if [ $i != "--reset" ]
+	then
+		reset_config+=" $i"
+	fi
+	sudo /etc/DNSlock/reset $reset_config
+	done
 	  ;;
 
 ##Tail dnsmasq log
