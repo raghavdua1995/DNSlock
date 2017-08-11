@@ -4,12 +4,14 @@
 ##Install DNSMASQ
 echo y | apt-get update
 echo y | apt-get install dnsmasq
+
 ##Install lighttpd and configure block page
 echo y | apt-get install lighttpd
 wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/favicon.ico
 wget -O /var/www/html/index.html https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/index.html
 sudo chmod 0777 /etc/lighttpd/lighttpd.conf
 sudo echo 'server.error-handler-404   = "/index.html"' >> /etc/lighttpd/lighttpd.conf
+sudo sed -i 's|#include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port|include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port|' /etc/lighttpd/lighttpd.conf
 echo "Select a interface for DNSlock to listen on, available interfaces are :"
 ls /sys/class/net
 read iface < /dev/tty
@@ -18,58 +20,75 @@ iface_ipv6="$(/sbin/ifconfig eth0 |  awk '/inet6/{print $3}' | cut -d/ -f1)"
 sudo echo dnslock_iface=$iface >> /etc/environment
 sudo echo dnslock_iface_ip=$iface_ip >> /etc/environment
 sudo echo dnslock_iface_ipv6=$iface_ipv6 >> /etc/environment
+
 ##Backup dnsmasq default config file
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
+
 ##Download preconfigured dnsmasq config file
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
 mkdir /etc/DNSlock
+
 ##Download control script and make it executable
 wget -O /etc/DNSlock/DNSlock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
 chmod 0777 /etc/DNSlock/DNSlock
+
 ##Download domain blacklisting script and make it executable
 wget -O /etc/DNSlock/blacklist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/blacklist
 chmod 0777 /etc/DNSlock/blacklist
+
 ##Download domain whitelisting script and make it executable
 wget -O /etc/DNSlock/whitelist https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/whitelist
 chmod 0777 /etc/DNSlock/whitelist
+
 ##Download script to remove domains from whitelist and make it executable
 wget -O /etc/DNSlock/RemoveWL https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/RemoveWL
 chmod 0777 /etc/DNSlock/RemoveWL
+
 ##Download domain wildcard blacklistng script and make it executable
 wget -O /etc/DNSlock/wildcard https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/wildcard
 chmod 0777 /etc/DNSlock/wildcard
+
 ##Create hosts file: 'contentblock.list', dnsmasq will use contentblock.list as additional hosts file to block content
 touch /etc/DNSlock/contentblock.list
 chmod 0777 /etc/DNSlock/contentblock.list
+
 ##Create hosts file: 'blacklist.list', dnsmasq will use blacklist.list as additional hosts file to blacklist domains
 touch /etc/DNSlock/blacklist.list
 chmod 0777 /etc/DNSlock/blacklist.list
+
 ##Create file: 'whitelist.list', whitelisted domains will written in whitelist.list
 touch /etc/DNSlock/whitelist.list
 chmod 0777 /etc/DNSlock/whitelist.list
+
 ##Download help file
 wget -O /etc/DNSlock/help https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/help
 ##Delete orignal resolv.conf file and replace it with downloaded resolv.conf file which uses Google's DNS resolvers
 wget -O /etc/resolv.conf.downloaded https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/resolv.conf
 rm /etc/resolv.conf
 mv /etc/resolv.conf.downloaded /etc/resolv.conf
+
 ##Download list containing hosts files sources
 wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
 chmod 0777 /etc/DNSlock/sources.list
+
 ##Download safesearch hosts file
 wget -O /etc/DNSlock/safesearch.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/safesearch.list
 ##Download script to update DNSlock IP address/Interface
 wget -O /etc/DNSlock/setIP https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/setIP
 chmod 0777 /etc/DNSlock/setIP
+
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
 wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
 chmod 0777 /etc/DNSlock/update
+
 ##Create symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
 ln -s /etc/DNSlock/DNSlock /usr/local/bin/DNSlock
+
 ##Update contentblock.list, restart DNSMASQ, restart lighttpd
 DNSlock --update
 service dnsmasq restart
 service lighttpd restart
+
 ##Install cronjob to:
 #Update contentblock.list daily
 #Delete log at 23:59 daily
@@ -77,5 +96,6 @@ echo "Installing Cronjobs"
 wget -O /etc/cron.d/DNSlock-cron https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock-cron
 chown root /etc/cron.d/DNSlock-cron
 chmod 0644 /etc/cron.d/DNSlock-cron
+
 ##Restart request
 echo "Please restart the system for changes to take effect"
