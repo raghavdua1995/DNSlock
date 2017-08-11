@@ -29,7 +29,7 @@ then
 echo "List fetched."
 rm /etc/DNSlock/cache _$n.list.bak 2>>/dev/null
 else
-echo "Failed to fetch list, using catched list instead."
+echo "Failed to fetch list, using cached list instead."
 mov /etc/DNSlock/cache _$n.list.bak /etc/DNSlock/cache _$n.list 2>>/dev/null
 fi
 done
