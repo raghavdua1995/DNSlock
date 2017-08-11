@@ -1,0 +1,117 @@
+#!/bin/bash
+
+##Function to reset IP address/Interface
+function reset_IP {
+	echo "Select a interface for DNSlock to listen on, available interfaces are :"
+	ls /sys/class/net
+	read iface < /dev/tty
+	iface_ip="$(/sbin/ifconfig $iface | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
+	iface_ipv6="$(/sbin/ifconfig eth0 |  awk '/inet6/{print $3}' | cut -d/ -f1)"
+
+	##Update blacklist file
+	sudo sed -i "s|$dnslock_iface_ip|$iface_ip|" /etc/DNSlock/blacklist.list
+	sudo sed -i "s|$dnslock_iface_ipv6|$iface_ipv6|" /etc/DNSlock/blacklist.list
+
+	##Update wildcard and config file
+	sudo sed -i "s|$dnslock_iface_ip|$iface_ip|" /etc/dnsmasq.conf
+
+	##Remove old values
+	sudo sed -i "/$dnslock_iface/d" /etc/environment
+	sudo sed -i "/$dnslock_iface_ip/d" /etc/environment
+	sudo sed -i "/$dnslock_iface_ipv6/d" /etc/environment
+
+	##Set new values
+	sudo echo dnslock_iface=$iface >> /etc/environment
+	sudo echo dnslock_iface_ip=$iface_ip >> /etc/environment
+	sudo echo dnslock_iface_ipv6=$iface_ipv6 >> /etc/environment
+
+	sudo service dnsmasq restart
+
+}
+
+##Function to reset blacklist
+function reset_blacklist {
+	sudo rm /etc/DNSlock/blacklist.list
+	sudo touch /etc/DNSlock/blacklist.list
+	chmod 0777 /etc/DNSlock/blacklist.list
+	sudo service dnsmasq restart
+}
+
+##Function to reset whitelist
+function reset_whitelist {
+	sudo rm /etc/DNSlock/whitelist.list
+	sudo touch /etc/DNSlock/whitelist.list
+	chmod 0777 /etc/DNSlock/whitelist.list
+	DNSlock --update
+}
+
+##Function to reset dnsmasq
+function reset_dnsmasq {
+	sudo rm /etc/dnsmasq.conf
+	wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
+	sudo service dnsmasq restart
+}
+
+
+##Function to reset hosts file sources
+function reset_sources {
+	sudo rm /etc/DNSlock/sources.list
+	wget -O /etc/DNSlock/sources.list https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/sources.list
+	chmod 0777 /etc/DNSlock/sources.list
+}
+
+##Function to reset web server
+function reset_webserver {
+	echo y | sudo apt-get purge lighttpd
+	sudo rm /var/www/html/favicon.ico
+	sudo rm /var/www/html/index.html
+	echo y | sudo apt-get install lighttpd
+	wget -O /var/www/html/favicon.ico https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/favicon.ico
+	wget -O /var/www/html/index.html https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/index.html
+	sudo chmod 0777 /etc/lighttpd/lighttpd.conf
+	sudo echo 'server.error-handler-404   = "/index.html"' >> /etc/lighttpd/lighttpd.conf
+	sudo sed -i 's|#include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port|include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port|' /etc/lighttpd/lighttpd.conf
+	service lighttpd restart
+}
+
+for i; do
+if [ $i == "complete" ]
+then
+	reset_dnsmasq
+	reset_sources
+	reset_webserver
+	reset_blacklist
+	reset_IP
+	reset_whitelist
+	echo "DNSlock have been reconfigured, please restart the system for changes to take effect"
+
+elif [ $i == "ip" ]
+then
+	reset_IP
+	echo "Interface/IP address updated, please restart the system for changes to take effect"
+
+elif [ $i == "blacklist" ]
+then
+	reset_blacklist
+	
+elif [ $i == "whitelist" ]
+then
+	reset_whitelist
+
+elif [ $i == "dnsmasq" ]
+then
+	reset_dnsmasq
+	
+elif [ $i == "sources" ]
+then
+	reset_sources
+	DNSlock --update
+	
+elif [ $i == "webserver" ]
+then
+	reset_webserver	
+	
+
+fi
+
+done
