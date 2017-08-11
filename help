@@ -28,21 +28,21 @@ DNSlock --forcesafesearch : Enforce safe search on Google and Youtube
 
 DNSlock --disablesafesearch : Stop enforcing safe search on Google and Youtube
 
-DNSlock --reset dnsmasq- Resets dnsmasq server to default settings
+DNSlock --reset dnsmasq : Resets dnsmasq server to default settings
 
-DNSlock --reset sources- Replaces hosts file sources list with the default one
+DNSlock --reset sources : Replaces hosts file sources list with the default one
 
-DNSlock --reset webserver- Restores lighttpd web server's default settings
+DNSlock --reset webserver : Restores lighttpd web server's default settings
 
-DNSlock --reset blacklist- Removes all user blacklisted domains
+DNSlock --reset blacklist : Removes all user blacklisted domains
 
-DNSlock --reset whitelist- Removes all user whitelisted domains
+DNSlock --reset whitelist : Removes all user whitelisted domains
 
-DNSlock --reset ip- Resets/Updates DNSlock's IP address/Interface
-
-Note: DNSlock --reset can accept multiple arguments
+DNSlock --reset ip : Resets/Updates DNSlock's IP address/Interface
 
 DNSlock --reset complete- Performs a full reset
+
+Note: DNSlock --reset can accept multiple arguments
 
 DNSlock --tail : Tail DNSlock logs
 
