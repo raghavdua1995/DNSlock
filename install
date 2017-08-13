@@ -82,7 +82,7 @@ wget -O /etc/DNSlock/reset https://raw.githubusercontent.com/raghavdua1995/DNSlo
 chmod 0777 /etc/DNSlock/reset
 
 ##Download script to pull/update hosts files from sources mentioned in sources.list and make it executable
-wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/script
+wget -O /etc/DNSlock/update https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/update
 chmod 0777 /etc/DNSlock/update
 
 ##Create symbolic link /usr/local/bin/DNSlock ----> /etc/DNSlock/DNSlock
