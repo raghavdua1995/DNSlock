@@ -100,9 +100,9 @@ case "$1" in
 '--*wildcard') for i; do
                  if [ $i != "--*wildcard" ]
                  then
-                       if grep -q -x "address=/.$i/$dnslock_iface_ip" "/etc/dnsmasq.conf";
+                       if grep -q -x "address=/.$i/$dnslock_iface_ip" "/etc/DNSlock/config/wildcard.conf";
                        then
-                       sudo sed -i "\%address=/.$i/$dnslock_iface_ip%d" /etc/dnsmasq.conf && echo "$i removed from wildcard list"
+                       sudo sed -i "\%address=/.$i/$dnslock_iface_ip%d" /etc/DNSlock/config/wildcard.conf && echo "$i removed from wildcard list"
                        else
                        echo "Domain not found in wildcard"
                        fi
