@@ -25,10 +25,10 @@ sudo echo dnslock_iface_ipv6=$iface_ipv6 >> /etc/environment
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
 
 ##Download preconfigured dnsmasq config file
+mkdir /etc/DNSlock
 mkdir /etc/DNSlock/config
 touch /etc/DNSlock/config/wildcard.conf
 wget -O /etc/dnsmasq.conf https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/dnsmasq.conf
-mkdir /etc/DNSlock
 
 ##Download control script and make it executable
 wget -O /etc/DNSlock/DNSlock https://raw.githubusercontent.com/raghavdua1995/DNSlock/master/DNSlock
