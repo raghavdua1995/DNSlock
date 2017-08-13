@@ -41,8 +41,15 @@ function reset_blacklist {
 function reset_whitelist {
 	sudo rm /etc/DNSlock/whitelist.list
 	sudo touch /etc/DNSlock/whitelist.list
-	chmod 0777 /etc/DNSlock/whitelist.list
-	DNSlock --update
+	sudo service dnsmasq restart
+}
+
+##Function to reset wildcard list
+function reset_wildcard {
+	sudo rm /etc/DNSlock/config/wildcard.conf
+	sudo touch /etc/DNSlock/config/wildcard.conf
+	chmod 0777 /etc/DNSlock/blacklist.list
+	sudo service dnsmasq restart
 }
 
 ##Function to reset dnsmasq
@@ -83,6 +90,7 @@ then
 	reset_blacklist
 	reset_IP
 	reset_whitelist
+	reset_wildcard
 	echo "DNSlock have been reconfigured, please restart the system for changes to take effect"
 
 elif [ $i == "ip" ]
@@ -97,6 +105,10 @@ then
 elif [ $i == "whitelist" ]
 then
 	reset_whitelist
+	
+elif [ $i == "wildcard" ]
+then
+	reset_wildcard	
 
 elif [ $i == "dnsmasq" ]
 then
