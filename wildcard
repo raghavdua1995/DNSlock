@@ -1,0 +1,25 @@
+#!/bin/bash
+for i; do
+	if grep -P '(?=^.{4,253}$)(^(?:[a-zA-Z](?:(?:[a-zA-Z0-9\-]){0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$)' <<< "$i" >> /dev/null ;
+	then
+ 		if grep -q "address=/.$i/$dnslock_iface_ip" "/etc/DNSlock/config/wildcard.conf";
+ 		then
+ 			echo "Domain is already IPv4 wildcard blocked, checking for IPv6."
+ 		else
+			echo "Adding $i to IPv4 wildcard list"
+ 			echo "address=/.$i/$dnslock_iface_ip" >> /etc/DNSlock/config/wildcard.conf
+ 		fi
+
+		if grep -q "address=/.$i/$dnslock_iface_ipv6" "/etc/DNSlock/config/wildcard.conf";
+        	then
+        		echo "Domain is already IPv6 wildcard blocked, no,further action is required.."
+        	else
+			echo "Adding $i to IPv6 wildcard list"
+        		echo "address=/.$i/$dnslock_iface_ipv6" >> /etc/DNSlock/config/wildcard.conf
+        	fi
+	else
+		echo "Please Enter a valid domain name"
+	fi
+done
+##Restart DNSMASQ
+service dnsmasq restart
