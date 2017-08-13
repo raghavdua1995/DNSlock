@@ -96,16 +96,24 @@ case "$1" in
 	      sudo /etc/DNSlock/wildcard $wildcard_domains
 	  ;;
 
-##Remove domains specified in arguments from wildcard
+##Remove domains specified in arguments from wildcard list
 '--*wildcard') for i; do
                  if [ $i != "--*wildcard" ]
                  then
                        if grep -q -x "address=/.$i/$dnslock_iface_ip" "/etc/DNSlock/config/wildcard.conf";
                        then
-                       sudo sed -i "\%address=/.$i/$dnslock_iface_ip%d" /etc/DNSlock/config/wildcard.conf && echo "$i removed from wildcard list"
+                       sudo sed -i "\%address=/.$i/$dnslock_iface_ip%d" /etc/DNSlock/config/wildcard.conf && echo "$i removed from IPv4 wildcard list"
                        else
-                       echo "Domain not found in wildcard"
+                       echo "Domain is not in IPv4 wildcard list, checking for IPv6"
                        fi
+
+		       if grep -q -x "address=/.$i/$dnslock_iface_ipv6" "/etc/DNSlock/config/wildcard.conf";
+                       then
+                       sudo sed -i "\%address=/.$i/$dnslock_iface_ipv6%d" /etc/DNSlock/config/wildcard.conf && echo "$i removed from IPv6 wildcard list"
+                       else
+                       echo "Domain not found in IPv6 wildcard"
+                       fi
+
                  fi
                done
                sudo service dnsmasq restart
