@@ -13,7 +13,7 @@ function reset_IP {
 	sudo sed -i "s|$dnslock_iface_ipv6|$iface_ipv6|" /etc/DNSlock/blacklist.list
 
 	##Update wildcard and config file
-	sudo sed -i "s|$dnslock_iface_ip|$iface_ip|" /etc/dnsmasq.conf
+	sudo sed -i "s|$dnslock_iface_ip|$iface_ip|" /etc/DNSlock/config/wildcard.conf
 
 	##Remove old values
 	sudo sed -i "/$dnslock_iface/d" /etc/environment
