@@ -22,15 +22,17 @@ case "$1" in
 ##Check if dnsmasq is active or not
 '--status') bcount=$(sudo grep -c "is 0.0.0.0" "/var/log/DNSlock.log")
 	    qcount=$(sudo grep -c "query" "/var/log/DNSlock.log")
+	    ccount=$(sudo grep -c "cached" "/var/log/DNSlock.log")
 	    echo "DNSlock status: $( systemctl is-active dnsmasq.service)"
-	    echo "Queries Blocked: $bcount"
 	    echo "Total Queries: $qcount"
+	    echo "Queries Blocked: $bcount"
 	    if [ $qcount == 0 ]
 	    then
 	    echo "0% of total queries blocked"
 	    else 
 	    echo "$(echo  | awk "{print $bcount / $qcount * 100}")% of total queries blocked"
 	    fi
+	    echo "Cached Hit Ratio: $(echo  | awk "{print $ccount / $qcount * 100}")%"	
 	  ;;
 
 ##Call blacklist script to add domains specified in arguments to blacklist
