@@ -32,7 +32,7 @@ case "$1" in
 	    else 
 	    echo "$(echo  | awk "{print $bcount / $qcount * 100}")% of total queries blocked"
 	    fi
-	    echo "Cached Hit Ratio: $(echo  | awk "{print $ccount / $qcount * 100}")%"	
+	    echo "Cache Hit Ratio: $(echo  | awk "{print $ccount / $qcount * 100}")%"	
 	  ;;
 
 ##Call blacklist script to add domains specified in arguments to blacklist
