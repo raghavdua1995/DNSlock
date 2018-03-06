@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 for i; do
         if grep -P '(?=^.{4,253}$)(^(?:[a-zA-Z](?:(?:[a-zA-Z0-9\-]){0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$)' <<< "$i" >> /dev/null ;
