@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ##Installation script for DNSlock
 
 ##Install DNSMASQ
@@ -15,8 +15,8 @@ sudo sed -i 's|#include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port|i
 echo "Select a interface for DNSlock to listen on, available interfaces are :"
 ls /sys/class/net
 read iface < /dev/tty
-iface_ip="$(/sbin/ifconfig $iface | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
-iface_ipv6="$(/sbin/ifconfig eth0 |  awk '/inet6/{print $3}' | cut -d/ -f1)"
+iface_ip="$(/sbin/ifconfig enp2s0 | grep 'inet' | cut -d: -f2 | awk '{ print $2}')"
+iface_ipv6="$(/sbin/ifconfig enp2s0 | grep 'inet6' | awk '{ print $2}')"
 sudo echo dnslock_iface=$iface >> /etc/environment
 sudo echo dnslock_iface_ip=$iface_ip >> /etc/environment
 sudo echo dnslock_iface_ipv6=$iface_ipv6 >> /etc/environment
