@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ##Removing duplicates from sources.list ( Hosts file sources list) and resetting permissions.
 sudo awk '!a[$0]++' /etc/DNSlock/sources.list > /tmp/sources.list && cp /tmp/sources.list /etc/DNSlock/
