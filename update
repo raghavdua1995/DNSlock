@@ -8,8 +8,6 @@ sudo chmod 0777 /etc/DNSlock/sources.list
 ##Create temporary file where domains from various host file will me written.
 touch /etc/DNSlock/common_hosts.list
 
-n=1;
-
 ##Ensuring hosts file sources are not blocked ( Unless explicitly blacklisted ) by whitelisting them.
 echo "Whitlisting hosts file sources"
 for i in $(cat /etc/DNSlock/sources.list); do
@@ -21,22 +19,24 @@ DNSlock --whitelist $domain
 ##For loop to download hosts from sources mentioned in sources.list. If download succedes then loop will create new cached list and delete the backup cached list other$
 
 for i in $(cat /etc/DNSlock/sources.list); do
-cp /etc/DNSlock/cache _$n.list /etc/DNSlock/cache _$n.list.bak 2>>/dev/null;
+filename="$(echo "$i" | tr / -)";
+cp /etc/DNSlock/$i.list /etc/DNSlock/$filename.list.bak 2>>/dev/null;
 echo "Fetching-" $i
-curl -s $i > /etc/DNSlock/cache_$n.list; res=$?; n=$((n+1));
+curl -s $i > /etc/DNSlock/$filename.list; res=$?;
 if [ "$res" == "0" ]
 then
 echo "List fetched."
-rm /etc/DNSlock/cache _$n.list.bak 2>>/dev/null
+rm /etc/DNSlock/$filename.list.bak 2>>/dev/null
 else
 echo "Failed to fetch list, using cached list instead."
-mov /etc/DNSlock/cache _$n.list.bak /etc/DNSlock/cache _$n.list 2>>/dev/null
+mov /etc/DNSlock/$filename.list.bak /etc/DNSlock/$filename.list 2>>/dev/null
 fi
 done
 
 ##Copying content from cached lists to common_hosts.list.
-for((k=1;k<n;k++)); do
-cat /etc/DNSlock/cache_$k.list >> /etc/DNSlock/common_hosts.list;
+for k in $(cat /etc/DNSlock/sources.list); do
+filename="$(echo "$k" | tr / -)"
+cat /etc/DNSlock/$filename.list >> /etc/DNSlock/common_hosts.list;
 done
 
 rm /etc/DNSlock/contentblock.list
