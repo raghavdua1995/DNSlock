@@ -10,7 +10,7 @@ for i; do
                         echo "Adding $i to whitelist"
                         echo "$i" >> /etc/DNSlock/whitelist.list
 			sudo sed -i "/0.0.0.0	$i/d" /etc/DNSlock/contentblock.list
-			sudo sed -i "/::1   $i/d" /etc/DNSlock/contentblockipv6.list
+			sudo sed -i "/::1	$i/d" /etc/DNSlock/contentblockipv6.list
                 fi
         elif grep -P '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<< $i >> /dev/null ;
         then
