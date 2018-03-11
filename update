@@ -50,15 +50,15 @@ rm /etc/DNSlock/contentblock.list
 ##Delete any leftover trailing blanks
 ##Sort and remove duplicate entries
 ##Store merged entries in contentblock.list( Additional hosts file being used by DNSMASQ to block content )
-##Remove first 2 lines ( that is: 0.0.0.0 and 0.0.0.0 0.0.0.0)
-##Remove invalid host names
+##Remove invalid host names and store in temp file
+##Remove IPv4 addresses from temp file and redirect(overwrite) the output to contentblock.list
 ##Append '0.0.0.0	' in front of host names
 ##Remove 'temp' file
 echo "Merging Lists"
 sudo sed -e 's/\r//' -e 's/127.0.0.1//' -e 's/0.0.0.0//'  -e 's/[[:space:]]*//g'  -e 's/#.*$//' -e 's/[ \t]*$//' < /etc/DNSlock/common_hosts.list | sort -u > /etc/DNSlock/contentblock.list
-sudo sed -i '1,2d' /etc/DNSlock/contentblock.list
 grep -P '(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$' /etc/DNSlock/contentblock.list > /etc/DNSlock/temp
-sed -e 's/^/0.0.0.0	/' /etc/DNSlock/temp > /etc/DNSlock/contentblock.list
+sudo grep -P -v '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$' /etc/DNSlock/temp > /etc/DNSlock/contentblock.list
+sed -i 's/^/0.0.0.0	/' /etc/DNSlock/contentblock.list
 sudo rm /etc/DNSlock/temp
 
 ##Remove whitelisted domains
