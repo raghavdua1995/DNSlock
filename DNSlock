@@ -29,10 +29,11 @@ case "$1" in
 	    if [ $qcount == 0 ]
 	    then
 	    echo "0% of total queries blocked"
+	    echo "Cache Hit Ratio: 0%"
 	    else 
 	    echo "$(echo  | awk "{print $bcount / $qcount * 100}")% of total queries blocked"
+	    echo "Cache Hit Ratio: $(echo  | awk "{print $ccount / $qcount * 100}")%"
 	    fi
-	    echo "Cache Hit Ratio: $(echo  | awk "{print $ccount / $qcount * 100}")%"	
 	  ;;
 
 ##Call blacklist script to add domains specified in arguments to blacklist
