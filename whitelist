@@ -14,7 +14,7 @@ for i; do
                 fi
         elif grep -P '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<< $i >> /dev/null ;
         then
-                echo "$i is an IPv4 address, there no need to whitelist it"
+                echo "$i is an IPv4 address, there no need to whitelist it."
         else
                 echo "Please Enter a valid domain name"
         fi
