@@ -4,7 +4,7 @@ for i; do
 	then
  		if grep -q "address=/.$i/$dnslock_iface_ip" "/etc/DNSlock/config/wildcard.conf";
  		then
- 			echo "Domain is already IPv4 wildcard blocked, checking for IPv6."
+ 			echo "$i is already IPv4 wildcard blocked, checking for IPv6."
  		else
 			echo "Adding $i to IPv4 wildcard list"
  			echo "address=/.$i/$dnslock_iface_ip" >> /etc/DNSlock/config/wildcard.conf
@@ -12,7 +12,7 @@ for i; do
 
 		if grep -q "address=/.$i/$dnslock_iface_ipv6" "/etc/DNSlock/config/wildcard.conf";
         	then
-        		echo "Domain is already IPv6 wildcard blocked, no,further action is required.."
+        		echo "$i is already IPv6 wildcard blocked, no,further action is required."
         	else
 			echo "Adding $i to IPv6 wildcard list"
         		echo "address=/.$i/$dnslock_iface_ipv6" >> /etc/DNSlock/config/wildcard.conf
